@@ -7,12 +7,27 @@
 #define START_TIME 1535170680
 
 #include <ctime>
+#include <emscripten/emscripten.h>
+#include <stdio.h>
 #include <iostream>
+#include <chrono>
 
 int getSeconds (time_t UTC_time);
 int getMinutes (time_t UTC_time);
 int getHours   (time_t UTC_time);
 int getDays    (time_t UTC_time);
+
+extern "C" {
+void EMSCRIPTEN_KEEPALIVE print()
+{
+	time_t diff = time(0) - START_TIME;
+	printf("Ça fait maintenant %d jours, %d heures, %d minutes, %d secondes que tu m'endures mon coeur! <3\n",
+			getDays(diff),
+			getHours(diff),
+			getMinutes(diff),
+			getSeconds(diff));
+}
+}
 
 int main()
 {
