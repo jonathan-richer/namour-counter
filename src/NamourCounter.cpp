@@ -14,7 +14,8 @@ int getMinutes (time_t UTC_time);
 int getHours   (time_t UTC_time);
 int getDays    (time_t UTC_time);
 
-int main() {
+int main()
+{
 	time_t start      = START_TIME;
 	time_t current    = time(0);
 	time_t difference = current - start;
@@ -26,7 +27,14 @@ int main() {
 			<< jours << " jours, "
 			<< heures << " heures, "
 			<< minutes << " minutes et "
-			<< secondes << " secondes que tu m'endures!! <3";
+			<< secondes << " secondes que tu m'endures!! <3"
+			<< std::endl << std::endl;
+	std::cout << "Code source: "
+			<< std::endl << "\t" << "Version colorée: "
+			<< "https://github.com/jonathan-richer/namour-counter/blob/master/src/NamourCounter.cpp"
+			<< std::endl << "\t" << "Version non-colorée: "
+			<< "https://raw.githubusercontent.com/jonathan-richer/namour-counter/master/src/NamourCounter.cpp"
+			<< std::endl;
 	return 0;
 }
 
