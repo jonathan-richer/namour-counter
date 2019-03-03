@@ -4,8 +4,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="favicon.png" type="image/png">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Namour Counter</title>
+		<style>
+			body {
+				background-color: rgb(226, 78, 231);
+			}
+
+		</style>
 	</head>
 
 	<body>
@@ -17,9 +24,16 @@
 			const getHours = time => Math.floor(((time / 3600000) - 1) % 24);
 			const getMinutes = time => Math.floor((time / 60000) % 60);
 			const getSeconds = time => Math.floor((time / 1000) % 60);
+			let lastDiff = Date.now() - start_date;
+			const changeText = diff => {
+				time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
+			}
 			const computeTime = async () => {
 				const diff = Date.now() - start_date;
-				time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
+				if (getSeconds(lastDiff) !== getSeconds(diff)) {
+					changeText(diff);
+					lastDiff = diff;
+				}
 				setTimeout(computeTime, 100);
 			};
 			computeTime();
