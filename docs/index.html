@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Namour Counter</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Namour Counter</title>
+	</head>
 
-<body>
-	<h1 id="time"></h1>
-	<script>
-		const time = document.getElementById("time");
-		const start_date = new Date(2018, 07, 25, 0, 18, 0);
-		const getDays = time => Math.floor(time / 86400000);
-		const getHours = time => Math.floor(((time / 3600000) - 5) % 24);
-		const getMinutes = time => Math.floor((time / 60000) % 60);
-		const getSeconds = time => Math.floor((time / 1000) % 60);
-		const computeTime = async () => {
-			const diff = Date.now() - start_date;
-			time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
-			setTimeout(computeTime, 100);
-		};
-		computeTime();
-	</script>
-</body>
+	<body>
+		<h1 id="time"></h1>
+		<script>
+			const time = document.getElementById("time");
+			const start_date = new Date(2018, 07, 25, 0, 18, 0);
+			const getDays = time => Math.floor(time / 86400000);
+			const getHours = time => Math.floor(((time / 3600000) - 1) % 24);
+			const getMinutes = time => Math.floor((time / 60000) % 60);
+			const getSeconds = time => Math.floor((time / 1000) % 60);
+			const computeTime = async () => {
+				const diff = Date.now() - start_date;
+				time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
+				setTimeout(computeTime, 100);
+			};
+			computeTime();
+		</script>
+	</body>
 
 </html>
