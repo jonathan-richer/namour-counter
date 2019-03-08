@@ -46,19 +46,59 @@
 			const getHours = time => Math.floor(((time / 3600000) - 1) % 24);
 			const getMinutes = time => Math.floor((time / 60000) % 60);
 			const getSeconds = time => Math.floor((time / 1000) % 60);
-			let lastDiff = getSeconds(Date.now() - start_date);
-			const changeText = diff => {
-				time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! \u1F70D`;
+
+			const lastDiff = {
+				seconds: getSeconds(new Date(Date.now()) - start_date),
+				minutes: getMinutes(new Date(Date.now()) - start_date),
+				hours: getHours(new Date(Date.now()) - start_date),
+				days: getDays(new Date(Date.now()) - start_date)
+			}
+
+			const units = {
+				SEC: "seconds",
+				MIN: "minutes",
+				HOUR: "hours",
+				DAY: "days"
+			};
+			const { SEC, MIN, HOUR, DAY } = units;
+
+			const changeText = (units, diff) => {
+				const elt = document.getElementById(units);
+				switch (units) {
+					case SEC:
+						elt.innerText = getSeconds(diff).toString();
+						break;
+					case MIN:
+						elt.innerText = getMinutes(diff).toString();
+						break;
+					case HOUR:
+						elt.innerText = getHours(diff).toString();
+						break;
+					case DAY:
+						elt.innerText = getDays(diff).toString();
+						break;
+				}
 				// time.innerText = `Ça fait maintenant ${getYears()} années, ${getMonths()} mois, ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
 			}
 			const computeTime = async () => {
 				const diff = Date.now() - start_date;
-				if (lastDiff !== getSeconds(diff)) {
-					changeText(diff);
-					lastDiff = getSeconds(diff);
+				if (getSeconds(diff) !== lastDiff.seconds) {
+					changeText(SEC, diff);
+				}
+				if (getMinutes(diff) !== lastDiff.minutes) {
+					changeText(MIN, diff);
+				}
+				if (getHours(diff) !== lastDiff.hours) {
+					changeText(HOUR, diff);
+				}
+				if (getDays(diff) !== lastDiff.days) {
+					changeText(DAY, diff);
 				}
 				setTimeout(computeTime, 100);
 			};
+			for (const unit in units) {
+				changeText(units[unit], Date.now() - start_date);
+			}
 			computeTime();
 		</script>
 	</body>
