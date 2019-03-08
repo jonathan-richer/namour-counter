@@ -84,15 +84,19 @@
 				const diff = Date.now() - start_date;
 				if (getSeconds(diff) !== lastDiff.seconds) {
 					changeText(SEC, diff);
+					lastDiff.seconds = getSeconds(diff);
 				}
 				if (getMinutes(diff) !== lastDiff.minutes) {
 					changeText(MIN, diff);
+					lastDiff.minutes = getMinutes(diff);
 				}
 				if (getHours(diff) !== lastDiff.hours) {
 					changeText(HOUR, diff);
+					lastDiff.hours = getHours(diff);
 				}
 				if (getDays(diff) !== lastDiff.days) {
 					changeText(DAY, diff);
+					lastDiff.days = getDays(diff);
 				}
 				setTimeout(computeTime, 100);
 			};
