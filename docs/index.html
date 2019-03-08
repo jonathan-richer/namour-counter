@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="favicon.png" type="image/png">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- <script type="text/javascript" src="p5.min.js"></script> -->
 		<title>Namour Counter</title>
 		<style>
 			body {
@@ -16,23 +17,45 @@
 	</head>
 
 	<body>
-		<h1 id="time"></h1>
-		<script>
+		<h1>Ça fait maintenant <span id="days"></span> jours,
+			<span id="hours"></span> heures,
+			<span id="minutes"></span>minutes,
+			<span id="seconds"></span> secondes que tu m'endures! &#x2764;&#x2665;&#x2764;
+		</h1>
+		<script type="text/javascript">
+
+			// function setup() {
+			// 	createCanvas(200, 200);
+			// 	background(0);
+			// 	beginShape();
+			// 	for (let a = 0; a < TWO_PI; a += PI / 1000) {
+			// 		const x = 40000 * ((width / 2) + (16 * sin(a)));
+			// 		const y = 40000 * ((height / 2) + (13 * cos(a) - 5 * cos(2 * a) - 2 * cos(3 * a) - cos(4 * a)));
+			// 		Math.
+			// 		vertex(x, y);
+			// 	}
+			// 	endShape(CLOSE);
+			// 	noLoop();
+			// }
+
 			const time = document.getElementById("time");
 			const start_date = new Date(2018, 07, 25, 0, 18, 0);
+			// const getYears = () => (new Date(Date.now()).getFullYear() - start_date.getUTCFullYear());
+			// const getMonths = () => Math.abs(new Date(Date.now()).getMonth() - start_date.getMonth());
 			const getDays = time => Math.floor(time / 86400000);
 			const getHours = time => Math.floor(((time / 3600000) - 1) % 24);
 			const getMinutes = time => Math.floor((time / 60000) % 60);
 			const getSeconds = time => Math.floor((time / 1000) % 60);
-			let lastDiff = Date.now() - start_date;
+			let lastDiff = getSeconds(Date.now() - start_date);
 			const changeText = diff => {
-				time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
+				time.innerText = `Ça fait maintenant ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! \u1F70D`;
+				// time.innerText = `Ça fait maintenant ${getYears()} années, ${getMonths()} mois, ${getDays(diff)} jours, ${getHours(diff)} heures, ${getMinutes(diff)} minutes, ${getSeconds(diff)} secondes que tu m'endures! <3`;
 			}
 			const computeTime = async () => {
 				const diff = Date.now() - start_date;
-				if (getSeconds(lastDiff) !== getSeconds(diff)) {
+				if (lastDiff !== getSeconds(diff)) {
 					changeText(diff);
-					lastDiff = diff;
+					lastDiff = getSeconds(diff);
 				}
 				setTimeout(computeTime, 100);
 			};
