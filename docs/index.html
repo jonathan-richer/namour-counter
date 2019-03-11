@@ -43,7 +43,7 @@
 			// const getYears = () => (new Date(Date.now()).getFullYear() - start_date.getUTCFullYear());
 			// const getMonths = () => Math.abs(new Date(Date.now()).getMonth() - start_date.getMonth());
 			const getDays = time => Math.floor(time / 86400000);
-			const getHours = time => Math.floor(((time / 3600000) - 1) % 24);
+			const getHours = time => Math.floor(((time / 3600000) - 0) % 24);
 			const getMinutes = time => Math.floor((time / 60000) % 60);
 			const getSeconds = time => Math.floor((time / 1000) % 60);
 
